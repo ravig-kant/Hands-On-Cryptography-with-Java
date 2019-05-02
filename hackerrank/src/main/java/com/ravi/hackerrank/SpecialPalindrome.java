@@ -30,16 +30,20 @@ public class SpecialPalindrome {
             this._left = left;
         }
         
-        private void findUsingFirstRule( String lastMatch, List<String> results){
+        private void findSameAlphabetStrings( String lastMatch, List<String> results, Letter remaining){
             StringBuffer sb = new StringBuffer();
-            sb.append(lastMatch);
-            Letter left = _left;
-            sb.append(_char);
-            if(left!=null){
-                if(left._char == _char){
+            
+            if(lastMatch != null)
+                sb.append(lastMatch);
+            
+            Letter right = _right;
+            if(right!=null){
+                if(right._char == _char){
                     results.add(sb.append(_char).toString());
-                    left.findUsingFirstRule(sb.toString(), results);
+                    right.findSameAlphabetStrings(sb.toString(), results, remaining);
                 }    
+            }else{
+                remaining = right;
             }
             
         }
